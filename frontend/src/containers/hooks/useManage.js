@@ -14,6 +14,7 @@ const ManageProvider = (props) => {
     const [ifStartCounting, setIfStartCounting] = useState(false);
     const [name, setName] = useState();
     const [studyTime, setStudyTime] = useState(null);
+    const [subjectToStudy, setSubjectToStudy] = useState();
     const onFinish = () => {
         //function for StudyPage countdownTimer finish countdown
     };
@@ -22,7 +23,7 @@ const ManageProvider = (props) => {
     <ManageContext.Provider
         value={{
             signedIn, setSignedIn, name, setName, studyTime, setStudyTime, 
-            ifStartCounting, setIfStartCounting, onFinish
+            ifStartCounting, setIfStartCounting, onFinish, subjectToStudy, setSubjectToStudy
         }}
         {...props}
     />

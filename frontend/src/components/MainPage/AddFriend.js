@@ -96,7 +96,7 @@ const AddFriend = ({setName}) => {
             
                 <div
                     style={{
-                        height: 250,
+                        height: 200,
                         overflow: 'auto'
                     }}
                 >

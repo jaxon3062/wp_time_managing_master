@@ -20,13 +20,17 @@ const Wrapper = styled.div`
 `;
 
 const MainPage = () => {
-  const { name, setName, signedIn, setSignedIn, studyTime, setStudyTime, ifStartCounting, setIfStartCounting} = useManage();
+  const { name, setName, signedIn, setSignedIn, studyTime, setStudyTime, 
+          ifStartCounting, setIfStartCounting, subjectToStudy, setSubjectToStudy} = useManage();
   
   return (
     <Wrapper>
         <Header />
         <Divider>choose how long you want to study</Divider>
-        <SelectTime studyTime={studyTime} setStudyTime={setStudyTime} ifStartCounting={ifStartCounting} setIfStartCounting={setIfStartCounting}/>
+        <SelectTime studyTime={studyTime} setStudyTime={setStudyTime} 
+                    ifStartCounting={ifStartCounting} setIfStartCounting={setIfStartCounting}
+                    subjectToStudy={subjectToStudy} setSubjectToStudy={setSubjectToStudy}/>
+        
         <br></br>
         <AddFriend></AddFriend>
     </Wrapper>

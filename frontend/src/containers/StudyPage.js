@@ -21,12 +21,13 @@ const Wrapper = styled.div`
 `;
 
 const StudyPage = () => {
-  const { studyTime, ifStartCounting, setIfStartCounting, onFinish } = useManage();
+  const { studyTime, ifStartCounting, setIfStartCounting, onFinish, subjectToStudy, setSubjectToStudy} = useManage();
   
   return (
     <Wrapper>
         <Header />
-        <CountDownTimer studyTime={studyTime} ifStartCounting={ifStartCounting} setIfStartCounting={setIfStartCounting} onFinish={onFinish}/>
+        <CountDownTimer studyTime={studyTime} ifStartCounting={ifStartCounting} setIfStartCounting={setIfStartCounting} 
+                        onFinish={onFinish}   subjectToStudy={subjectToStudy}/> 
         <br></br>
         <br></br>
         <Divider>Friends online</Divider>

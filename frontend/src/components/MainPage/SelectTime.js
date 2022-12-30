@@ -5,6 +5,8 @@ import { useState, useEffect, useRef, useContext} from "react";
 import { TimePicker } from 'antd';
 import { CaretRightOutlined, UserOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
+import TextField from '@mui/material/TextField';
+
 
 const Wrapper = styled.section`
 display: flex;
@@ -14,11 +16,18 @@ flex-direction: row;
 
 `;
 
-const SelectTime = ({studyTime, setStudyTime, ifStartCounting, setIfStartCounting}) => {
+const SelectTime = ({studyTime, setStudyTime, ifStartCounting, setIfStartCounting, setSubjectToStudy, subjectToStudy}) => {
     
     return (
     <Wrapper>
         <Space style={{width: '100%', justifyContent: 'center'}}>
+            <TextField
+                id="standard-basic"
+                label="subject to study"
+                variant="standard"
+                style={{ marginBottom: 15 }}
+                onChange={(e) => setSubjectToStudy(e.target.value)}
+            />
             <TimePicker 
                 onChange={(time, timeString) => {
                     console.log(time, timeString);
@@ -34,8 +43,9 @@ const SelectTime = ({studyTime, setStudyTime, ifStartCounting, setIfStartCountin
                 icon={<CaretRightOutlined />}
                 style={{ margin: 10 }}
                 onClick={() => {
+                    //need if-else for not filling textfield and picking time
                     setIfStartCounting(!ifStartCounting)
-                    console.log(studyTime)
+                    console.log(subjectToStudy)
                 }
                 }
             >
