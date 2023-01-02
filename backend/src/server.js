@@ -7,6 +7,7 @@ import { useServer } from 'graphql-ws/lib/use/ws';
 // resolvers
 
 // db
+import userModel from "./models/user";
 
 const pubSub = createPubSub();
 
@@ -22,7 +23,7 @@ const yoga = createYoga({
     }),
     context: {
       pubSub,
-      // db model
+      userModel
     },
     graphiql: {
       subscriptionsProtocol: 'WS'

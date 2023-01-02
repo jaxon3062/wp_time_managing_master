@@ -1,6 +1,38 @@
+enum Status {
+    OFFLINE
+    ONLINE
+    STUDY
+}
+
 type User {
     id: ID!
     name: String!
-    friends: [User]!
+    friends: [User]
     status: String!
+    messages: [Message]
+    friendRequest: [User]
+}
+
+type Message {
+    from: User!
+    to: User!
+    content: String!
+}
+
+type Query {
+    getFriends(id: ID!): [User]!
+    findUser(name: String!): [ID]!
+}
+
+type Mutation {
+    addFriend(id: ID!, friendID: ID!): User!
+    acceptFriend(id: ID!, friendID: ID!): User!
+    removeFriend(id: ID!, friendID: ID!): User!
+    register(name: String!): User!
+    # startStudy
+}
+
+type Subscription {
+    friendStartStudy: User!
+    friendStopStudy: User!
 }
