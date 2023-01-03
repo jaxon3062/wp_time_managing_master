@@ -91,7 +91,9 @@ const Mutation = {
         );
 
         // TODO: if user not exist
-
+        if (!user) {
+            return user;
+        }
 
         pubSub.publish(`${name} status update`, {
             friendStatusUpdate: user
@@ -114,8 +116,7 @@ const Mutation = {
         });
 
         return user;
-    }
-
+    },
 };
 
 export default Mutation;

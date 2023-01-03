@@ -20,8 +20,8 @@ type Message {
 }
 
 type Query {
-    getFriends(id: ID!): [User]!
-    findUser(name: String!): [ID]!
+    getFriends(name: String!): [User]!
+    findUser(name: String!): User!
 }
 
 type Mutation {
