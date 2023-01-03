@@ -1,12 +1,12 @@
-import userModel from "../models/user";
+import { v4 as uuidv4 } from 'uuid';
 
 const Mutation = {
-    addFriend: async (parent, { name, friendName }, { pubSub }) => {
-        const friend = userModel.findOne({ name: friendName });
+    addFriend: async (parent, { name, friendName }, { userModel, pubSub }) => {
+        const friend = await userModel.findOne({ name: friendName });
         if (!friend) {
             return friend;
         }
-        const me = userModel.findOne({ name: name });
+        const me = await userModel.findOne({ name: name });
 
         friend.friendRequest.push(me);
         await friend.save();
@@ -17,11 +17,15 @@ const Mutation = {
 
         return friend;
     },
-    acceptFriend: async (parent, { name, friendName }, { pubSub }) => {
-        const me = await userModel.findOne(name);
-        const friend = await userModel.findOne(friendName);
+    acceptFriend: async (parent, { name, friendName }, { userModel, pubSub }) => {
+        const me = await userModel
+            .findOne({ name: name })
+            .populate({ path: "friendRequest" })
+            .populate({ path: "friends" });
+        const friend = await userModel.findOne({ name: friendName })
+            .populate({ path: "friends" });
 
-        const myFriendReq = me.friendRequest.filter((fr) => (fr.id !== friendID));
+        const myFriendReq = me.friendRequest.filter((fr) => (fr.name !== friendName));
         me.friendRequest = myFriendReq;
 
         me.friends.push(friend);
@@ -40,9 +44,13 @@ const Mutation = {
 
         return friend;
     },
-    removeFriend: async (parent, { name, friendName }, { pubSub }) => {
-        const me = await userModel.findOne(name);
-        const friend = await userModel.findOne(friendName);
+    removeFriend: async (parent, { name, friendName }, { userModel, pubSub }) => {
+        const me = await userModel
+            .findOne({ name: name })
+            .populate({ path: "friends" });
+        const friend = await userModel
+            .findOne({ name: friendName })
+            .populate({ path: "friends" });
 
         let newFriendList = me.friends.filter((fr) => (fr.name !== friendName));
         me.friends = newFriendList;
@@ -62,38 +70,37 @@ const Mutation = {
 
         return friend;
     },
-    register: async (parent, { name }, { pubSub }) => {
+    register: async (parent, { name, password }, { userModel, pubSub }) => {
         // TODO: crypt
 
         // if username already exists
-        const existUser = userModel.findOne({ name: name });
+        const existUser = await userModel.findOne({ name: name });
         if (existUser) {
+            console.log(`user ${name} exists`);
             existUser.name = "";
             return existUser;
         }
 
         // create a new user
-        const newUser = await new userModel({ 
+        const newUser = new userModel({ 
+            id: uuidv4(),
             name: name,
             status: "OFFLINE",
-        }).save();
+        });
+        await newUser.save();
         return newUser;
     },
-    logIn: async (parent, { name, password }, { pubSub }) => {
+    logIn: async (parent, { name, password }, { userModel, pubSub }) => {
         // todo: crypt
-        const user = userModel.findOneAndUpdate(
-            { name: name },
-            {
-                $set: {
-                    status: "ONLINE",
-                }
-            }
-        );
+        const user = await userModel.findOne({ name: name });
 
-        // TODO: if user not exist
+        // if user not exist
         if (!user) {
             return user;
         }
+
+        user.status = "ONLINE";
+        await user.save();
 
         pubSub.publish(`${name} status update`, {
             friendStatusUpdate: user
@@ -101,15 +108,10 @@ const Mutation = {
 
         return user;
     },
-    statusUpdate: async (parent, { name, status }, { pubSub }) => {
-        const user = await userModel.findOneAndUpdate(
-            { name: name }, 
-            {
-                $set: {
-                    status: status,
-                }
-            }
-        );
+    statusUpdate: async (parent, { name, status }, { userModel, pubSub }) => {
+        const user = await userModel.findOne({ name: name }); 
+        user.status = status;
+        await user.save();
         
         pubSub.publish(`${name} status update`, {
             friendStatusUpdate: user

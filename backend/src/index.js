@@ -1,7 +1,7 @@
-import mongo from "./mongo.js";
-import httpServer from "./server.js";
+import httpServer from "./server";
+import mongo from "./mongo";
 
-import "dotenv-defaults/config.js";
+//import "dotenv-defaults/config.js";
 
 mongo.connect();
 const port = process.env.PORT | 4000;

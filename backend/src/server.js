@@ -5,13 +5,13 @@ import { createSchema, createYoga, createPubSub } from 'graphql-yoga';
 import { useServer } from 'graphql-ws/lib/use/ws';
 
 // resolvers
-import Query from './resolvers/Query';
-import Mutation from './resolvers/Mutation';
-import Subscription from './resolvers/Subsciption';
-import User from './resolvers/User';
+import Query from './resolvers/Query.js';
+import Mutation from './resolvers/Mutation.js';
+import Subscription from './resolvers/Subsciption.js';
+import User from './resolvers/User.js';
 
 // db
-import userModel from "./models/user";
+import userModel from "./models/user.js";
 
 const pubSub = createPubSub();
 

@@ -1,10 +1,15 @@
 const Query = {
     getFriends: async (parent, { name }, { userModel }) => {
-        const user = await userModel.findOne(name);
+        const user = await userModel
+            .findOne({ name: name })
+            .populate({ path: "friends" });
         return user.friends;
     },
     findUser: async (parent, { name }, { userModel }) => {
-        const user = await userModel.find({ name: name });
+        const user = await userModel
+            .findOne({ name: name })
+            .populate({ path: "friendRequest" })
+            .populate({ path: "friends" });
         return user;
     },
 

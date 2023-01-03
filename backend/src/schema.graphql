@@ -7,10 +7,10 @@ enum Status {
 type User {
     id: ID!
     name: String!
-    friends: [User]
+    friends: [User]!
+    messages: [Message]!
+    friendRequest: [User]!
     status: String!
-    messages: [Message]
-    friendRequest: [User]
 }
 
 type Message {
@@ -27,7 +27,7 @@ type Query {
 type Mutation {
     addFriend(name: String!, friendName: String!): User!
     acceptFriend(name: String!, friendName: String!): User!
-    removeFriend(name: String!, friendName: ID!): User!
+    removeFriend(name: String!, friendName: String!): User!
     register(name: String!, password: String!): User!
     logIn(name: String!, password: String!): User!
     statusUpdate(name: String!, status: String!): User!
