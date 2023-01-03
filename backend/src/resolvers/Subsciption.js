@@ -1,30 +1,24 @@
 const Subscription = {
-    // friendStartStudy: {
-    //     subscribe: (parent, args, { pubSub }) => {
-
-    //     }
-    // },
-    // friendStopStudy: {
-    //     subscribe: (parent, args, { pubSub }) => {
-
-    //     }
-    // },
     friendAdded: {
-        subscribe: (parent, { id }, { pubSub }) => {
-            return pubSub.subscribe(`${id} add friend`);
+        subscribe: (parent, { name }, { pubSub }) => {
+            return pubSub.subscribe(`${name} add friend`);
         }
     },
     friendAccepted: {
-        subscribe: (parent, { id }, { pubSub }) => {
-            return pubSub.subscribe(`${id} new friend`);
+        subscribe: (parent, { name }, { pubSub }) => {
+            return pubSub.subscribe(`${name} new friend`);
         }
     },
     friendRemoved: {
-        subscribe: (parent, { id }, { pubSub }) => {
-            return pubSub.subscribe(`${id} remove friend`);
+        subscribe: (parent, { name }, { pubSub }) => {
+            return pubSub.subscribe(`${name} remove friend`);
         }
     },
-
+    friendStatusUpdate: {
+        subscribe: (parent, { name }, { pubSub }) => {
+            return pubSub.subscribe(`${name} status update`)
+        }
+    },
 };
 
 export default Subscription;

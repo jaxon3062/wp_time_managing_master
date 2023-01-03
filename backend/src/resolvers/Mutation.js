@@ -76,7 +76,6 @@ const Mutation = {
         // if username already exists
         const existUser = await userModel.findOne({ name: name });
         if (existUser) {
-            console.log(`user ${name} exists`);
             existUser.name = "";
             return existUser;
         }

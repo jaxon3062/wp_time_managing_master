@@ -14,8 +14,8 @@ type User {
 }
 
 type Message {
-    from: User!
-    to: User!
+    from: String!
+    to: String!
     context: String!
 }
 
@@ -35,8 +35,8 @@ type Mutation {
 }
 
 type Subscription {
-    friendStatusUpdate: User!
-    friendAdded: User!
-    friendAccepted: User!
-    friendRemoved: User!
+    friendStatusUpdate(name: String!): User!
+    friendAdded(name: String!): User!
+    friendAccepted(name: String!): User!
+    friendRemoved(name: String!): User!
 }
