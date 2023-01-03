@@ -5,6 +5,10 @@ import { createSchema, createYoga, createPubSub } from 'graphql-yoga';
 import { useServer } from 'graphql-ws/lib/use/ws';
 
 // resolvers
+import Query from './resolvers/Query';
+import Mutation from './resolvers/Mutation';
+import Subscription from './resolvers/Subsciption';
+import User from './resolvers/User';
 
 // db
 import userModel from "./models/user";
@@ -19,6 +23,10 @@ const yoga = createYoga({
       ),
       resolvers: {
       // resolvers
+        User,
+        Query,
+        Mutation,
+        Subscription,
       },
     }),
     context: {

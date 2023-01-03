@@ -16,7 +16,7 @@ type User {
 type Message {
     from: User!
     to: User!
-    content: String!
+    context: String!
 }
 
 type Query {
@@ -25,14 +25,18 @@ type Query {
 }
 
 type Mutation {
-    addFriend(id: ID!, friendID: ID!): User!
-    acceptFriend(id: ID!, friendID: ID!): User!
-    removeFriend(id: ID!, friendID: ID!): User!
-    register(name: String!): User!
-    # startStudy
+    addFriend(name: String!, friendName: String!): User!
+    acceptFriend(name: String!, friendName: String!): User!
+    removeFriend(name: String!, friendName: ID!): User!
+    register(name: String!, password: String!): User!
+    logIn(name: String!, password: String!): User!
+    statusUpdate(name: String!, status: String!): User!
+    sendMessage(from: String!, to: String!, context: String!): User!
 }
 
 type Subscription {
-    friendStartStudy: User!
-    friendStopStudy: User!
+    friendStatusUpdate: User!
+    friendAdded: User!
+    friendAccepted: User!
+    friendRemoved: User!
 }
