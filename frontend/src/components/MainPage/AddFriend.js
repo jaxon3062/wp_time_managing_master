@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 import { Space, Button, Tag, message, Input, Divider, List} from 'antd'
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 import { useState, useEffect, useRef, useContext} from "react";
 import { TimePicker } from 'antd';
+import TextField from '@material-ui/core/TextField';
 import { CaretRightOutlined, UserOutlined } from "@ant-design/icons";
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
+import { Typography } from 'antd';
+const { Title } = Typography;
 
 const Wrapper = styled.section`
 display: flex;
@@ -29,7 +32,7 @@ const data = [
 
 const useStyles = makeStyles({
     root: {
-      minWidth: 275,
+      minWidth: 320,
     },
     bullet: {
       display: 'inline-block',
@@ -48,6 +51,7 @@ const AddFriend = ({setName}) => {
     const classes = useStyles();
     return (
     <Wrapper>
+        <Space  direction="horizontal" align="center" style={{width: '100%', justifyContent: 'center'}}>
         <Card className={classes.root}>
             <CardContent >
                 <Space style={{width: '100%', justifyContent: 'center'}}>
@@ -87,16 +91,65 @@ const AddFriend = ({setName}) => {
                     </Button>
                 </Space>
             </CardActions>
+            <Divider></Divider>
+            {/* <Space style={{width: '100%', justifyContent: 'center'}}>
+                
+            </Space> */}
+            <CardContent >
+                <Space style={{width: '100%', justifyContent: 'center'}}>
+                    <TextField
+                        id="filled-read-only-input"
+                        label="friend confirm"
+                        //defaultValue is for friendRequest[0]
+                        defaultValue={'friend 1'}
+                        InputProps={{
+                            readOnly: true,
+                        }}
+                        variant="outlined"
+                        color="primary"
+                        focused
+                        style={{ width: 160, marginTop: -15}}
+                    />
+                </Space>
+            </CardContent>
+            <CardActions>
+                <Space direction="horizontal" align="center" split={<Divider type="vertical" />} style={{width: '100%', justifyContent: 'center', marginBottom: 12}}>
+                    <Button
+                        shape="round"
+                        type="primary"
+                        style={{ width: 80, height: 35 , background: "#0000b3"}}
+                        onClick={() => {
+                        }
+                        }
+                    >
+                        accept
+                    </Button>
+                    <Button
+                        shape="round"
+                        type="primary"
+                        style={{ width: 80,  height: 35 , background: "#0000b3"}}
+                        onClick={() => {
+                        }
+                        }
+                    >
+                        reject
+                    </Button>
+                </Space>
+            </CardActions>
+        </Card>
+
+        {/* friends list's card */}
+        <Card className={classes.root}>
             <CardContent>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                <Typography variant="h6" gutterBottom >
+                <Title level={4} style={{ marginTop: -5 }}>
                     Friends list
-                </Typography>
+                </Title>
                 </div>
             
                 <div
                     style={{
-                        height: 200,
+                        height: 250,
                         overflow: 'auto'
                     }}
                 >
@@ -111,6 +164,8 @@ const AddFriend = ({setName}) => {
                 
             </CardContent>
         </Card>
+        </Space>
+        
         
     </Wrapper>
     );

@@ -1,13 +1,14 @@
 import styled from 'styled-components';
-import { Space, Button, Tag, message, Input, Divider, Statistic} from 'antd'
+import { Modal, Space, Button, Tag, message, Input, Divider, Statistic} from 'antd'
 import TextField from '@material-ui/core/TextField';
 
 import Typography from '@material-ui/core/Typography';
 
 import { useState, useEffect, useRef, useContext} from "react";
 import { TimePicker } from 'antd';
-import { CaretRightOutlined, UserOutlined } from "@ant-design/icons";
+import { CloseOutlined, UserOutlined, ExclamationCircleFilled } from "@ant-design/icons";
 import dayjs from "dayjs";
+const { confirm } = Modal;
 
 const Wrapper = styled.section`
 display: flex;
@@ -23,6 +24,26 @@ const CountDownTimer = ({studyTime, ifStartCounting, setIfStartCounting, onFinis
     const timeParts = studyTime.split(":");
     let timeUserPickInMillisec = toMilliseconds(timeParts[0], timeParts[1], timeParts[2])
     let finalValueOfCountDown = Date.now() + timeUserPickInMillisec
+
+    //extra confirm for countdown quit buttom, onClick function should put in onOK
+    const showQuitConfirm = () => {
+        confirm({
+          title: 'Are you sure to quit the study?',
+          icon: <ExclamationCircleFilled />,
+        //   content: 'Some descriptions',
+          okText: 'Yes',
+          okType: 'danger',
+          cancelText: 'No',
+          onOk() {
+            //need onClick function
+            setIfStartCounting(!ifStartCounting)
+            console.log('OK');
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
+    };
 
     return (
     <Wrapper>
@@ -42,6 +63,16 @@ const CountDownTimer = ({studyTime, ifStartCounting, setIfStartCounting, onFinis
           style={{ width: 120, marginRight: 30 }}
         />
         <Countdown title="Countdown" value={finalValueOfCountDown} onFinish={onFinish}></Countdown>
+        <Button
+            shape="default"
+            type="primary"
+            danger
+            icon={<CloseOutlined />}
+            style={{ marginLeft: 20 }}
+            onClick={showQuitConfirm}
+        >
+            quit
+        </Button>
     </Wrapper>
     );
 };
