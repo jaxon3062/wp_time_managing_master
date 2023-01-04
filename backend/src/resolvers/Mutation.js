@@ -117,11 +117,12 @@ const Mutation = {
 
         return user;
     },
-    statusUpdate: async (parent, { name, status }, { userModel, pubSub }) => {
+    statusUpdate: async (parent, { name, status, content }, { userModel, pubSub }) => {
         const user = await userModel
             .findOne({ name: name })
             .populate({ path: "friends" });
         user.status = status;
+        user.content = (status === "STUDY" ? content : "");
         await user.save();
         
         pubSub.publish(`${name} status update`, {

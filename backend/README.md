@@ -4,20 +4,23 @@
 
 ## *TODO*
 - [x] sign up / log in (basic, w/o encrypted password)
-- [ ] sign up / log in (advanced, w/ encrypted password)
+- [x] sign up / log in (advanced, w/ encrypted password)
 - [x] friend system (add, accept, remove)
 - [x] status change (online,  offline, study)
 - [x] message system
-- [ ] subscriptions
+- [x] subscriptions
+- [x] user content (subject)
 
 ## Types
 
 ### `User`
 - *name*: String! $\rightarrow$ *user*'s name(unique)
-- *friends*: [[User](#user)] $\rightarrow$ *user*'s friends
-- *messages*: [[Message](#message)] $\rightarrow$ messages *user* received
-- *friendRequest*: [[User](#user)] $\rightarrow$ friend requests sent to *user*
-- *status*: String $\rightarrow$
+- *friends*: [[User](#user)]! $\rightarrow$ *user*'s friends
+- *messages*: [[Message](#message)]! $\rightarrow$ messages *user* received
+- *friendRequest*: [[User](#user)]! $\rightarrow$ friend requests sent to *user*
+- *status*: String! $\rightarrow$ [Status](#status)
+- *ErrorMessage*: String $\rightarrow$ [ErrorMessage](#errormessage), not stored in db, only used when there's some error
+- *content*: String $\rightarrow$ the description an user displays when studying
 
 ### `Message`
 - *from*: String $\rightarrow$ the user sending the message
@@ -28,6 +31,11 @@
 - OFFLINE: "OFFLINE"
 - ONLINE: "ONLINE"
 - STUDY: "STUDY"
+
+### `ErrorMessage`
+- USER_EXIST: "USER_EXIST"
+- USER_NOT_FOUND: "USER_NOT_FOUND"
+- WRONG_PASSWORD: "WRONG_PASSWORD"
 
 ## Query
 
@@ -95,6 +103,7 @@
 - parameters:
   - *name*: String! $\rightarrow$ user name
   - *status*: String! $\rightarrow$ the new status
+  - *content*: String $\rightarrow$ the descriptions an user displays when studying, only works if `status="STUDY"`
 - return:
   - *name*'s data after update: [User](#user)
 

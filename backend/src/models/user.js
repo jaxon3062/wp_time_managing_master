@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema(
             required: true,
             ref: "user"
         }],
+        content: { type: String },
     },
     {
         collection: "user"
