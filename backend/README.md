@@ -1,6 +1,6 @@
 # Backend Manual
 
-> for more details, see the [graphql schema](./src/schema.graphql)
+> for more details, see [graphql schema](./src/schema.graphql)
 
 ## *TODO*
 - [x] sign up / log in (basic, w/o encrypted password)

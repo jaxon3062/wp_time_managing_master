@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv-defaults";
+import { dataInit } from "./upload";
 
 const connect = async () => {
     dotenv.config();
@@ -13,6 +14,10 @@ const connect = async () => {
         useUnifiedTopology: true,
     })
     .then(async (res) => {
+        if (process.env.MODE === "RESET") {
+          // reset db
+          dataInit();
+        }
         console.log("mongo db connection created")
     });
   
