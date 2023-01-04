@@ -1,0 +1,1 @@
+export { USER_QUERY } from './query';
