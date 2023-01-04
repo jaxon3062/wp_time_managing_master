@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Button, Input, Tag, message, Tabs, Avatar, AutoComplete} from 'antd'
+import { Space, Button, Input, Tag, message, Tabs, Avatar, AutoComplete} from 'antd'
 import { Divider } from 'antd';
 import {useManage} from './hooks/useManage.js'
 import styled from "styled-components";
@@ -10,6 +10,7 @@ import SelectTime from '../components/MainPage/SelectTime';
 import AddFriend from "../components/MainPage/AddFriend.js";
 import CountDownTimer from "../components/StudyPage/CountDownTimer.js";
 import StudyingFriendsList from "../components/StudyPage/StudyingFriendsList.js"
+import CheerUpMessage from "../components/StudyPage/CheerUpMessage.js";
 
 const Wrapper = styled.div`
   width: 1460px;
@@ -21,7 +22,8 @@ const Wrapper = styled.div`
 `;
 
 const StudyPage = () => {
-  const { studyTime, ifStartCounting, setIfStartCounting, onFinish, subjectToStudy, setSubjectToStudy} = useManage();
+  const { studyTime, ifStartCounting, setIfStartCounting, onFinish, subjectToStudy, setSubjectToStudy,
+          cheerUpMessage, setCheerUpMessage, onSendMessage} = useManage();
   
   return (
     <Wrapper>
@@ -32,7 +34,14 @@ const StudyPage = () => {
         <br></br>
         <Divider>Friends online</Divider>
         <br></br>
-        <StudyingFriendsList/>
+        <Space  direction="horizontal" align="center" style={{width: '100%', justifyContent: 'center'}}>
+          <StudyingFriendsList />
+          <Divider type="vertical" />
+          <CheerUpMessage cheerUpMessage={cheerUpMessage} setCheerUpMessage={setCheerUpMessage}
+                              onSendMessage={onSendMessage}/>
+
+        </Space>
+        
    </Wrapper>
   );
 }

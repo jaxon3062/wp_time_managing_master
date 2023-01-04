@@ -1,10 +1,12 @@
 import styled from 'styled-components';
-import { Space, Card, List} from 'antd'
-import Typography from '@material-ui/core/Typography';
+import { Space, Card, List, Divider, Input} from 'antd'
 import { useState, useEffect, useRef, useContext} from "react";
 import { TimePicker } from 'antd';
 import { CaretRightOutlined, UserOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
+import { CardContent } from '@material-ui/core';
+import { Typography } from 'antd';
+const { Title } = Typography;
 
 const Wrapper = styled.section`
 display: flex;
@@ -43,32 +45,38 @@ const data = [
       },
   ];
 
-const StudyingFriendsList = ({studyTime, ifStartCounting, setIfStartCounting, onFinish}) => {
+const StudyingFriendsList = ({}) => {
 
-    return (
+  return (
     <Wrapper>
+      
+        
         <div
-            style={{
-                width: 1000,
-                height: 300,
-                overflow: 'auto'
-            }}
+        style={{
+          width: 660,
+          height: 300,
+          overflowY: 'scroll',
+          overflowX: 'hidden'
+        }}
         >
-            <List
-                grid={{
-                gutter: 16,
-                column: 4
-                }}
-                dataSource={data}
-                renderItem={(item) => (
-                <List.Item>
-                    <Card title={item.title} style={{width: 200}}>Card content</Card>
-                </List.Item>
-                )}
-            />
+          <List
+              grid={{
+              gutter: 6,
+              column: 3
+              }}
+              style={{margin: 3}}
+              bordered
+              dataSource={data}
+              renderItem={(item) => (
+              <List.Item>
+                  <Card title={item.title} style={{ width: 160, marginTop: 10}}>Card content</Card>
+              </List.Item>
+              )}
+          />
         </div>
+        
     </Wrapper>
-    );
+  );
 };
 
 export default StudyingFriendsList;

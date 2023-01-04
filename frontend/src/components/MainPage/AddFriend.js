@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Space, Button, Tag, message, Input, Divider, List} from 'antd'
+import { Space, Button, Tag, message, Input, Divider, List, Badge} from 'antd'
 // import Typography from '@material-ui/core/Typography';
 import { useState, useEffect, useRef, useContext} from "react";
 import { TimePicker } from 'antd';
@@ -97,19 +97,22 @@ const AddFriend = ({setName}) => {
             </Space> */}
             <CardContent >
                 <Space style={{width: '100%', justifyContent: 'center'}}>
-                    <TextField
-                        id="filled-read-only-input"
-                        label="friend confirm"
-                        //defaultValue is for friendRequest[0]
-                        defaultValue={'friend 1'}
-                        InputProps={{
-                            readOnly: true,
-                        }}
-                        variant="outlined"
-                        color="primary"
-                        focused
-                        style={{ width: 160, marginTop: -15}}
-                    />
+                    {/* Badge count is for how much friendrequest are left */}
+                    <Badge count={5}>
+                        <TextField
+                            id="filled-read-only-input"
+                            label="friend confirm"
+                            // defaultValue is for friendRequest[0]
+                            defaultValue={'friend 1'}
+                            InputProps={{
+                                readOnly: true,
+                            }}
+                            variant="outlined"
+                            color="primary"
+                            focused
+                            style={{ width: 160, marginTop: -15}}
+                        />
+                    </Badge>
                 </Space>
             </CardContent>
             <CardActions>
