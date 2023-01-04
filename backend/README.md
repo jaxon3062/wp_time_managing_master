@@ -104,5 +104,42 @@
 - return:
   - the user received the message: [User](#user)
 
-## Subscription *(Working)*
+## Subscription 
+
+### `friendStatusUpdate`
+> notify if a friend's data changed 
+- parameters:
+  - name: String! $\rightarrow$ the friend's name you want to keep alert on
+- return:
+  - the friend's updated data: [User](#user)
+
+### `friendAdded`
+> notify if someone send a friend request to me
+- parameters:
+  - name: String! $\rightarrow$ my name
+- return:
+  - my updated data after receiving the request: [User](#user)
+
+
+### `friendAccepted`
+> notify if there's a new friend (whether accepted by whom)
+- parameters:
+  - name: String! $\rightarrow$ my name
+- return:
+  - my updated data after making new friend: [User](#user)
+
+
+### `friendRemoved`
+> notify if any friend is removed (whether removed by whom)
+- parameters:
+  - name: String! $\rightarrow$ my name
+- return:
+  - my updated data after removing friend: [User](#user)
+
+### `messageReceived`
+> notify when reveiving a new message
+- parameters:
+  - name: String! $\rightarrow$ my name
+- return:
+  - my updated data after receiving the new message: [User](#user)
 

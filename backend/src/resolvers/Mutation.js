@@ -12,7 +12,7 @@ const Mutation = {
         await friend.save();
 
         pubSub.publish(`${friendName} add friend`, {
-            friendAdded: me
+            friendAdded: friend
         });
 
         return friend;
@@ -35,11 +35,11 @@ const Mutation = {
         await friend.save();
 
         pubSub.publish(`${name} new friend`, {
-            friendAccepted: friend
+            friendAccepted: me
         });
 
         pubSub.publish(`${friendName} new friend`, {
-            friendAccepted: me
+            friendAccepted: friend
         });
 
         return friend;
@@ -61,14 +61,14 @@ const Mutation = {
         await friend.save();
 
         pubSub.publish(`${name} remove friend`, {
-            friendRemoved: friend
+            friendRemoved: me
         });
 
         pubSub.publish(`${friendName} remove friend`, {
-            friendRemoved: me
+            friendRemoved: friend
         })
 
-        return friend;
+        return me;
     },
     register: async (parent, { name, password }, { userModel, pubSub }) => {
         // TODO: crypt
@@ -108,7 +108,9 @@ const Mutation = {
         return user;
     },
     statusUpdate: async (parent, { name, status }, { userModel, pubSub }) => {
-        const user = await userModel.findOne({ name: name }); 
+        const user = await userModel
+            .findOne({ name: name })
+            .populate({ path: "friends" });
         user.status = status;
         await user.save();
         
