@@ -53,6 +53,7 @@
   - *friendName*: String! $\rightarrow$ the one *name* want to add
 - return:
   - *friendName*'s data: [User](#user)
+  - returns `User.ErrorMessage="USER_NOT_FOUND"` if such user *name* does not exist
 
 ### `acceptFriend`
 > accept friend request
@@ -77,7 +78,7 @@
   - *password*: String! $\rightarrow$ the password
 - return:
   - the new user data: [User](#user)
-  - returns `User.name=""` if there already exists another identical *name*
+  - returns `User.ErrorMessage="USER_EXIST"` if there already exists another identical *name*
 
 ### `logIn`
 > log in
@@ -86,6 +87,8 @@
   - *password*: String! $\rightarrow$ password
 - return:
   - *name*'s data: [User](#user)
+  - returns `User.ErrorMessage="USER_NOT_FOUND"` if such user *name* does not exist
+  - returns `User.ErrorMessage="WRONG_PASSWORD"` if the password is wrong
 
 ### `statusUpdate`
 > change status (OFFLINE, ONLINE, STUDY)

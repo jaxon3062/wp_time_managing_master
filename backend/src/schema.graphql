@@ -4,13 +4,20 @@ enum Status {
     STUDY
 }
 
+enum ErrorMessage {
+    USER_EXIST
+    USER_NOT_FOUND
+    WRONG_PASSWORD
+}
+
 type User {
-    id: ID!
     name: String!
+    password: String!
     friends: [User]!
     messages: [Message]!
     friendRequest: [User]!
     status: String!
+    ErrorMessage: String
 }
 
 type Message {
