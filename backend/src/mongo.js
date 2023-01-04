@@ -16,7 +16,7 @@ const connect = async () => {
     .then(async (res) => {
         if (process.env.MODE === "RESET") {
           // reset db
-          dataInit();
+          await dataInit();
         }
         console.log("mongo db connection created")
     });
