@@ -2,8 +2,8 @@ import mongoose, { Schema } from "mongoose";
 
 const userSchema = new mongoose.Schema(
     {
-        id: { type: String, required: true, unique: true },
         name: { type: String, required: true, unique: true },
+        password: { type: String, required: true },
         friends: [{ 
             type: Schema.Types.ObjectId, 
             required: true,
@@ -20,6 +20,7 @@ const userSchema = new mongoose.Schema(
             required: true,
             ref: "user"
         }],
+        content: { type: String },
     },
     {
         collection: "user"

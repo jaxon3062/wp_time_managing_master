@@ -4,13 +4,21 @@ enum Status {
     STUDY
 }
 
+enum ErrorMessage {
+    USER_EXIST
+    USER_NOT_FOUND
+    WRONG_PASSWORD
+}
+
 type User {
-    id: ID!
     name: String!
+    password: String!
     friends: [User]!
     messages: [Message]!
     friendRequest: [User]!
     status: String!
+    content: String
+    ErrorMessage: String
 }
 
 type Message {
@@ -30,7 +38,7 @@ type Mutation {
     removeFriend(name: String!, friendName: String!): User!
     register(name: String!, password: String!): User!
     logIn(name: String!, password: String!): User!
-    statusUpdate(name: String!, status: String!): User!
+    statusUpdate(name: String!, status: String!, content: String): User!
     sendMessage(from: String!, to: String!, context: String!): User!
 }
 

@@ -1,26 +1,28 @@
 import userModel from "./models/user";
-import { v4 as uuidv4 } from "uuid";
+import bcrypt from 'bcrypt';
+
+const pass = await bcrypt.hash('asd', 10);
 
 const example = [
   {
-    id: uuidv4(),
     name: "Adam",
+    password: pass,
     status: "OFFLINE",
     friends: [],
     messages: [],
     friendRequests: [],
   },
   {
-    id: uuidv4(),
     name: "Betty",
+    password: pass,
     status: "OFFLINE",
     friends: [],
     messages: [],
     friendRequests: [],
   },
   {
-    id: uuidv4(),
     name: "Cindy",
+    password: pass,
     status: "OFFLINE",
     friends: [],
     messages: [],
@@ -28,16 +30,16 @@ const example = [
 
   },
   {
-    id: uuidv4(),
     name: "Daniel",
+    password: pass,
     status: "OFFLINE",
     friends: [],
     messages: [],
     friendRequests: [],
   },
   {
-    id: uuidv4(),
     name: "Ethan",
+    password: pass,
     status: "OFFLINE",
     friends: [],
     messages: [],

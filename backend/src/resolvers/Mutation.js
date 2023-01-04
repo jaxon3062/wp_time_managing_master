@@ -1,9 +1,12 @@
-import { v4 as uuidv4 } from 'uuid';
+import bcrypt from 'bcrypt';
+
+const saltRound = process.env.SALT | 10;
 
 const Mutation = {
     addFriend: async (parent, { name, friendName }, { userModel, pubSub }) => {
         const friend = await userModel.findOne({ name: friendName });
         if (!friend) {
+            friend.ErrorMessage = "USER_NOT_FOUND";
             return friend;
         }
         const me = await userModel.findOne({ name: name });
@@ -71,19 +74,19 @@ const Mutation = {
         return me;
     },
     register: async (parent, { name, password }, { userModel, pubSub }) => {
-        // TODO: crypt
 
         // if username already exists
         const existUser = await userModel.findOne({ name: name });
         if (existUser) {
-            existUser.name = "";
+            existUser.ErrorMessage = "USER_EXIST";
             return existUser;
         }
 
         // create a new user
+        const pass = bcrypt.hash(password, saltRound);
         const newUser = new userModel({ 
-            id: uuidv4(),
             name: name,
+            password: pass,
             status: "OFFLINE",
         });
         await newUser.save();
@@ -95,7 +98,14 @@ const Mutation = {
 
         // if user not exist
         if (!user) {
+            user.ErrorMessage = "USER_NOT_FOUND";
             return user;
+        }
+
+        const valid = await bcrypt.compare(password, user.password);
+        if (!valid) {
+            user.ErrorMessage = "WRONG_PASSWORD";
+            return user
         }
 
         user.status = "ONLINE";
@@ -107,11 +117,12 @@ const Mutation = {
 
         return user;
     },
-    statusUpdate: async (parent, { name, status }, { userModel, pubSub }) => {
+    statusUpdate: async (parent, { name, status, content }, { userModel, pubSub }) => {
         const user = await userModel
             .findOne({ name: name })
             .populate({ path: "friends" });
         user.status = status;
+        user.content = (status === "STUDY" ? content : "");
         await user.save();
         
         pubSub.publish(`${name} status update`, {
