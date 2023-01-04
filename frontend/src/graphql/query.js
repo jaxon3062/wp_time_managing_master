@@ -14,3 +14,6 @@ export const USER_QUERY = gql`
 
     }
 `;
+
+export const GET_FRIENDS_QUERY = gql`
+`;
