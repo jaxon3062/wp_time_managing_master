@@ -5,7 +5,7 @@ import {useManage} from './hooks/useManage.js'
 
 
 const SignIn = () => {
-    const { name, setName, signedIn, setSignedIn } = useManage();
+    const { name, setName, signedIn, setSignedIn, password, setPassword } = useManage();
     // const handleLogin = (name) => {
     // if (!name){
     //     displayStatus({
@@ -26,7 +26,9 @@ const SignIn = () => {
     return (
         <>
             <AppTitle />
-            <Register signedIn={signedIn} name={name} setName={setName} onLogin={onLogin} onRegister={onRegister} setSignedIn={setSignedIn}/>
+            <Register signedIn={signedIn} name={name} setName={setName} onLogin={onLogin} 
+                      onRegister={onRegister} setSignedIn={setSignedIn} 
+                      password={password} setPassword={setPassword}/>
         </>
     );
 }

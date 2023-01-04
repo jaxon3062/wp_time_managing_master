@@ -30,7 +30,6 @@ const MainPage = () => {
         <SelectTime studyTime={studyTime} setStudyTime={setStudyTime} 
                     ifStartCounting={ifStartCounting} setIfStartCounting={setIfStartCounting}
                     subjectToStudy={subjectToStudy} setSubjectToStudy={setSubjectToStudy}/>
-        
         <br></br>
         <AddFriend></AddFriend>
     </Wrapper>

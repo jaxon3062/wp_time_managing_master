@@ -16,7 +16,13 @@ const ManageProvider = (props) => {
     const [name, setName] = useState();
     const [studyTime, setStudyTime] = useState(null);
     const [subjectToStudy, setSubjectToStudy] = useState();
+    const [cheerUpMessage, setCheerUpMessage] = useState();
+    const [password, setPassword] = useState("");
+
     const onFinish = () => {
+        //function for StudyPage countdownTimer finish countdown
+    };
+    const onSendMessage = () => {
         //function for StudyPage countdownTimer finish countdown
     };
 
@@ -24,7 +30,8 @@ const ManageProvider = (props) => {
     <ManageContext.Provider
         value={{
             signedIn, setSignedIn, name, setName, studyTime, setStudyTime, 
-            ifStartCounting, setIfStartCounting, onFinish, subjectToStudy, setSubjectToStudy
+            ifStartCounting, setIfStartCounting, onFinish, subjectToStudy, setSubjectToStudy,
+            cheerUpMessage, setCheerUpMessage, onSendMessage, password, setPassword
         }}
         {...props}
     />
