@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useContext} from "react";
 import { Button, Input, Tag, message} from 'antd'
 import React from "react";
 import { USER_QUERY } from "../../graphql/index";
+import { useQuery, useMutation } from "@apollo/client";
 
 const ManageContext = React.createContext({
     name:"",
@@ -18,6 +19,7 @@ const ManageProvider = (props) => {
     const [subjectToStudy, setSubjectToStudy] = useState();
     const [cheerUpMessage, setCheerUpMessage] = useState();
     const [password, setPassword] = useState("");
+    const { loading, error, data } = useQuery(USER_QUERY);
 
     const onFinish = () => {
         //function for StudyPage countdownTimer finish countdown
