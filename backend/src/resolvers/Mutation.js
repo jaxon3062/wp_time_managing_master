@@ -118,6 +118,18 @@ const Mutation = {
 
         return user;
     },
+    sendMessage: async (parent, { from, to, context }, { userModel, pubSub }) => {
+        const receiver = await userModel.findOne({ name: to });
+        receiver.messages.push({ from, to, context });
+        receiver.messages = receiver.messages.slice(-5);
+        await receiver.save();
+
+        pubSub.publish(`${to} received message`, {
+            messageReceived: receiver
+        })
+
+        return receiver;
+    }
 };
 
 export default Mutation;
