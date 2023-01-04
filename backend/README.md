@@ -7,7 +7,7 @@
 - [ ] sign up / log in (advanced, w/ encrypted password)
 - [x] friend system (add, accept, remove)
 - [x] status change (online,  offline, study)
-- [ ] message system
+- [x] message system
 - [ ] subscriptions
 
 ## Types
@@ -96,13 +96,13 @@
   - *name*'s data after update: [User](#user)
 
 ### `sendMessage`
-> send message
+> send [message](#message)
 - parameters:
   - *from*: String! $\rightarrow$ the name of the user sent the message
   - *to*: String! $\rightarrow$ the name of the user received the message
   - *context*: String $\rightarrow$ the message context
 - return:
-  - the user send to: [User](#user)
+  - the user received the message: [User](#user)
 
 ## Subscription *(Working)*
 

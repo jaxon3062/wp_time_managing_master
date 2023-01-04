@@ -39,4 +39,5 @@ type Subscription {
     friendAdded(name: String!): User!
     friendAccepted(name: String!): User!
     friendRemoved(name: String!): User!
+    messageReceived(name: String!): User!
 }
