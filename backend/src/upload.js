@@ -1,7 +1,6 @@
 import userModel from "./models/user";
-import bcrypt from 'bcrypt';
 
-const pass = await bcrypt.hash('asd', 10);
+const pass = '$2b$10$QMx45L5VyXB/LuLrJA.iheh1Ke4zaJoNc6FpUIafosZ4F7lvsrGIa'
 
 const example = [
   {
