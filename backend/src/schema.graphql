@@ -35,6 +35,7 @@ type Query {
 type Mutation {
     addFriend(name: String!, friendName: String!): User!
     acceptFriend(name: String!, friendName: String!): User!
+    rejectFriend(name: String!, friendName: String!): User!
     removeFriend(name: String!, friendName: String!): User!
     register(name: String!, password: String!): User!
     logIn(name: String!, password: String!): User!
@@ -44,8 +45,6 @@ type Mutation {
 
 type Subscription {
     friendStatusUpdate(name: String!): User!
-    friendAdded(name: String!): User!
-    friendAccepted(name: String!): User!
-    friendRemoved(name: String!): User!
+    friendUpdate(name: String!): User!
     messageReceived(name: String!): User!
 }

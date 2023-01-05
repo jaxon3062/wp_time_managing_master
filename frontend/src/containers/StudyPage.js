@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 `;
 
 const StudyPage = () => {
-  const { studyTime, ifStartCounting, setIfStartCounting, onFinish, subjectToStudy, setSubjectToStudy,
+  const { name, studyTime, ifStartCounting, setIfStartCounting, onFinish, subjectToStudy, setSubjectToStudy,
           cheerUpMessage, setCheerUpMessage, onSendMessage} = useManage();
   
   return (
@@ -37,8 +37,7 @@ const StudyPage = () => {
         <Space  direction="horizontal" align="center" style={{width: '100%', justifyContent: 'center'}}>
           <StudyingFriendsList />
           <Divider type="vertical" />
-          <CheerUpMessage cheerUpMessage={cheerUpMessage} setCheerUpMessage={setCheerUpMessage}
-                              onSendMessage={onSendMessage}/>
+          <CheerUpMessage />
 
         </Space>
         

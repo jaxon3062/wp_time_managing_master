@@ -6,6 +6,9 @@ import { CaretRightOutlined, UserOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { CardContent } from '@material-ui/core';
 import { Typography } from 'antd';
+
+import { useManage } from '../../containers/hooks/useManage.js';
+
 const { Title } = Typography;
 
 const Wrapper = styled.section`
@@ -15,42 +18,11 @@ justify-content: center;
 flex-direction: row;
 `;
 
-const data = [
-    {
-      title: 'Title 1',
-    },
-    {
-      title: 'Title 2',
-    },
-    {
-      title: 'Title 3',
-    },
-    {
-      title: 'Title 4',
-    },
-    {
-      title: 'Title 5',
-    },
-    {
-      title: 'Title 6',
-    },
-    {
-    title: 'Title 7',
-    },
-    {
-        title: 'Title 8',
-      },
-      {
-      title: 'Title 9',
-      },
-  ];
-
-const StudyingFriendsList = ({}) => {
+const StudyingFriendsList = () => {
+  const { me } = useManage();
 
   return (
     <Wrapper>
-      
-        
         <div
         style={{
           width: 660,
@@ -66,10 +38,10 @@ const StudyingFriendsList = ({}) => {
               }}
               style={{margin: 3}}
               bordered
-              dataSource={data}
+              dataSource={me.friends.filter((fr) => fr.status === "STUDY")}
               renderItem={(item) => (
               <List.Item>
-                  <Card title={item.title} style={{ width: 160, marginTop: 10}}>Card content</Card>
+                  <Card title={item.name} style={{ width: 160, marginTop: 10}}>{item.content}</Card>
               </List.Item>
               )}
           />

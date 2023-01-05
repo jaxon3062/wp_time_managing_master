@@ -1,17 +1,7 @@
 const Subscription = {
-    friendAdded: {
+    friendUpdate: {
         subscribe: (parent, { name }, { pubSub }) => {
-            return pubSub.subscribe(`${name} add friend`);
-        }
-    },
-    friendAccepted: {
-        subscribe: (parent, { name }, { pubSub }) => {
-            return pubSub.subscribe(`${name} new friend`);
-        }
-    },
-    friendRemoved: {
-        subscribe: (parent, { name }, { pubSub }) => {
-            return pubSub.subscribe(`${name} remove friend`);
+            return pubSub.subscribe(`${name} update friend`);
         }
     },
     friendStatusUpdate: {

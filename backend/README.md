@@ -112,7 +112,7 @@
 - parameters:
   - *from*: String! $\rightarrow$ the name of the user sent the message
   - *to*: String! $\rightarrow$ the name of the user received the message
-  - *context*: String $\rightarrow$ the message context
+  - *context*: String! $\rightarrow$ the message context
 - return:
   - the user received the message: [User](#user)
 
