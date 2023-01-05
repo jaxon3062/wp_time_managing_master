@@ -167,6 +167,7 @@ const Register = () => {
                 }
               },
               onCompleted: () => {
+                setErrMsg("");
                 loadUser({
                   variables: {
                     name: name,

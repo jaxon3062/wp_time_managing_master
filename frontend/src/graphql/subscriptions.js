@@ -5,7 +5,7 @@ export const FRIENDSTATUSUPDATE = gql`
         friendStatusUpdate(name: $name) {
             name
             status
-            friends
+            content
         }
     }
 `;

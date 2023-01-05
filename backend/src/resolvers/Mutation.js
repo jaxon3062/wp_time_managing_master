@@ -120,8 +120,9 @@ const Mutation = {
     return newUser;
   },
   logIn: async (parent, { name, password }, { userModel, pubSub }) => {
-    // todo: crypt
-    const user = await userModel.findOne({ name: name });
+    const user = await userModel
+        .findOne({ name: name })
+        .populate({ path: "friends" });
 
     // if user not exist
     if (!user) {
@@ -136,9 +137,11 @@ const Mutation = {
     user.status = "ONLINE";
     await user.save();
 
-    pubSub.publish(`${name} status update`, {
-      friendStatusUpdate: user,
-    });
+    for (let fr of user.friends) {
+        pubSub.publish(`${fr.name} status update`, {
+            friendStatusUpdate: user,
+        });
+    }
 
     return user;
   },
@@ -154,9 +157,11 @@ const Mutation = {
     user.content = status === "STUDY" ? content : "";
     await user.save();
 
-    pubSub.publish(`${name} status update`, {
-      friendStatusUpdate: user,
-    });
+    for (let fr of user.friends) {
+      pubSub.publish(`${fr.name} status update`, {
+        friendStatusUpdate: user,
+      });
+    }
 
     return user;
   },

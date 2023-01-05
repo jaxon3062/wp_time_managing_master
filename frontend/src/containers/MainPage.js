@@ -27,21 +27,11 @@ const Wrapper = styled.div`
 
 const MainPage = () => {
   const {
-    name,
-    me,
     setMe,
-    signedIn,
-    setSignedIn,
-    studyTime,
-    setStudyTime,
-    ifStartCounting,
-    setIfStartCounting,
-    subjectToStudy,
-    setSubjectToStudy,
     called,
     loading,
     error,
-    data
+    data,
   } = useManage();
 
   const [friendName, setFriendName] = useState("");
@@ -62,14 +52,7 @@ const MainPage = () => {
     <Wrapper>
       <Header />
       <Divider>choose how long you want to study</Divider>
-      <SelectTime
-        studyTime={studyTime}
-        setStudyTime={setStudyTime}
-        ifStartCounting={ifStartCounting}
-        setIfStartCounting={setIfStartCounting}
-        subjectToStudy={subjectToStudy}
-        setSubjectToStudy={setSubjectToStudy}
-      />
+      <SelectTime />
       <br></br>
       <AddFriend friendName={friendName} setFriendName={setFriendName} ></AddFriend>
     </Wrapper>

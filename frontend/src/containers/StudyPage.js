@@ -22,14 +22,11 @@ const Wrapper = styled.div`
 `;
 
 const StudyPage = () => {
-  const { name, studyTime, ifStartCounting, setIfStartCounting, onFinish, subjectToStudy, setSubjectToStudy,
-          cheerUpMessage, setCheerUpMessage, onSendMessage} = useManage();
   
   return (
     <Wrapper>
         <Header />
-        <CountDownTimer studyTime={studyTime} ifStartCounting={ifStartCounting} setIfStartCounting={setIfStartCounting} 
-                        onFinish={onFinish}   subjectToStudy={subjectToStudy}/> 
+        <CountDownTimer /> 
         <br></br>
         <br></br>
         <Divider>Friends online</Divider>

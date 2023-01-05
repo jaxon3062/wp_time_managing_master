@@ -10,8 +10,9 @@ import {
   REJECT_FRIEND_MUTATION,
   REMOVE_FRIEND_MUTATION,
   SENDMESSAGE_MUTATION,
-  FRIENDUPDATED,
   STATUS_UPDATE_MUTATION,
+  FRIENDUPDATED,
+  FRIENDSTATUSUPDATE,
 } from "../../graphql";
 import { useQuery, useMutation, useLazyQuery } from "@apollo/client";
 
@@ -64,6 +65,26 @@ const ManageProvider = (props) => {
     });
   }, [subscribeToMore]);
 
+  useEffect(() => {
+    subscribeToMore({
+      document: FRIENDSTATUSUPDATE,
+      variables: {
+        name: name,
+      },
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data) return prev;
+        const updateFriend = subscriptionData.data.friendStatusUpdate;
+        return {
+          findUser: {
+            ...prev.findUser,
+            friends: prev.friends.map((fr) =>
+              fr.name === updateFriend.name ? updateFriend : fr
+            ),
+          },
+        };
+      },
+    });
+  }, [subscribeToMore]);
 
   const onStart = () => {
     // when start study

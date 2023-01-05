@@ -135,7 +135,7 @@ const CheerUpMessage = () => {
                 renderItem={(item) => (
                   <List.Item>
                     <List.Item.Meta
-                      title={item.title}
+                      title={item.name}
                       description={item.content}
                     />
                   </List.Item>
