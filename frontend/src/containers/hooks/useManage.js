@@ -54,7 +54,7 @@ const ManageProvider = (props) => {
         name: name,
       },
       updateQuery: (prev, { subscriptionData }) => {
-        console.log("subPub", subscriptionData);
+        //console.log("subPub", subscriptionData);
         if (!subscriptionData.data) return prev;
         const updateUser = subscriptionData.data.friendUpdate;
         return {
@@ -100,7 +100,7 @@ const ManageProvider = (props) => {
         name: name,
       },
       updateQuery: (prev, { subscriptionData }) => {
-        console.log("subPub", subscriptionData);
+        //console.log("subPub", subscriptionData);
         if (!subscriptionData.data) return prev;
         const sender = subscriptionData.data.messageReceived;
         return {

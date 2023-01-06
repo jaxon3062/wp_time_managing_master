@@ -66,10 +66,10 @@ const CountDownTimer = () => {
         //need onClick function
         setIfStartCounting(!ifStartCounting);
         onFinish();
-        console.log("OK");
+        //console.log("OK");
       },
       onCancel() {
-        console.log("Cancel");
+        //console.log("Cancel");
       },
     });
   };

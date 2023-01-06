@@ -23,6 +23,7 @@
     "uuid": "^9.0.0"
   },
   "scripts": {
-    "server": "nodemon src/index.js --ext js,graphql --exec babel-node"
+    "server": "nodemon src/index.js --ext js,graphql --exec babel-node",
+    "deploy": "NODE_ENV=production babel-node server.js"
   }
 }

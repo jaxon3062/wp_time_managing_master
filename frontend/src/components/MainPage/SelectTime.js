@@ -39,9 +39,9 @@ const SelectTime = () => {
         />
         <TimePicker
           onChange={(time, timeString) => {
-            console.log(time, timeString);
-            let test = dayjs(time);
-            console.log("test", test.format());
+            //console.log(time, timeString);
+            //let test = dayjs(time);
+            //console.log("test", test.format());
             setStudyTime(timeString);
           }}
           size="large"
@@ -55,7 +55,7 @@ const SelectTime = () => {
           onClick={() => {
             //need if-else for not filling textfield and picking time
             setIfStartCounting(!ifStartCounting);
-            console.log(subjectToStudy);
+            //console.log(subjectToStudy);
             onStart();
           }}
         ></Button>
