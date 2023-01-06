@@ -18,7 +18,7 @@ import userModel from "./models/user.js";
 
 const app = express();
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve();
   app.use(express.static(path.join(__dirname, "../frontend", "build")));
   app.get("/*", function (req, res) {
