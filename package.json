@@ -13,7 +13,5 @@
   "repository": "git@github.com:jaxon3062/wp_time_managing_master.git",
   "author": "Jason Lin <ltes10030306@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-    "bcrypt": "^5.1.0"
-  }
+  "dependencies": {}
 }
