@@ -85,8 +85,8 @@ export const STATUS_UPDATE_MUTATION = gql`
 `;
 
 export const SENDMESSAGE_MUTATION = gql`
-    mutation SendMessage($from: String!, $to: String!, $context: String!) {
-        sendMessage(from: $from, to: $to, context: $context) {
+    mutation SendMessage($name: String!, $context: String!) {
+        sendMessage(name: $name, context: $context) {
             name
             status
         }

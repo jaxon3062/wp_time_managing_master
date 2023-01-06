@@ -31,7 +31,6 @@ const MainPage = () => {
     called,
     loading,
     error,
-    data,
   } = useManage();
 
   const [friendName, setFriendName] = useState("");
@@ -42,10 +41,7 @@ const MainPage = () => {
     return <p>Error :(</p>;
   }
 
-  if (data && data.findUser) {
-    const { findUser: user } = data;
-    setMe(user);
-  }
+
   
 
   return (

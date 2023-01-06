@@ -24,7 +24,6 @@ const Wrapper = styled.section`
   flex-direction: row;
 `;
 
-
 const useStyles = makeStyles({
   root: {
     minWidth: 320,
@@ -42,10 +41,7 @@ const useStyles = makeStyles({
   },
 });
 
-const AddFriend = ({
-  friendName,
-  setFriendName,
-}) => {
+const AddFriend = ({ friendName, setFriendName }) => {
   const classes = useStyles();
   const {
     name,
@@ -56,10 +52,12 @@ const AddFriend = ({
     onRemoveFriend,
     errMsg,
     setErrMsg,
+    loading,
   } = useManage();
-  console.log(me);
-  const { friends, friendRequest } = me;
-  console.log(friends, friendRequest);
+
+  if (loading || !me) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <Wrapper>
@@ -95,7 +93,7 @@ const AddFriend = ({
                 shape="round"
                 type="primary"
                 style={{ width: 80, height: 35, background: "#0000b3" }}
-                onClick={() =>
+                onClick={() => {
                   onAddFriend({
                     variables: {
                       name,
@@ -111,8 +109,9 @@ const AddFriend = ({
                     onCompleted: () => {
                       setErrMsg("");
                     },
-                  })
-                }
+                  });
+                  setFriendName("");
+                }}
               >
                 Add
               </Button>
@@ -120,7 +119,7 @@ const AddFriend = ({
                 shape="round"
                 type="primary"
                 style={{ width: 80, height: 35, background: "#0000b3" }}
-                onClick={() =>
+                onClick={() => {
                   onRemoveFriend({
                     variables: {
                       name,
@@ -136,8 +135,9 @@ const AddFriend = ({
                     onCompleted: () => {
                       setErrMsg("");
                     },
-                  })
-                }
+                  });
+                  setFriendName("");
+                }}
               >
                 Delete
               </Button>
@@ -150,12 +150,14 @@ const AddFriend = ({
           <CardContent>
             <Space style={{ width: "100%", justifyContent: "center" }}>
               {/* Badge count is for how much friendrequest are left */}
-              <Badge count={friendRequest.length}>
+              <Badge count={me.friendRequest.length}>
                 <TextField
                   id="filled-read-only-input"
                   label="friend confirm"
                   // defaultValue is for friendRequest[0]
-                  value={friendRequest.length !== 0 ? friendRequest[0].name : ""}
+                  value={
+                    me.friendRequest.length !== 0 ? me.friendRequest[0].name : ""
+                  }
                   InputProps={{
                     readOnly: true,
                   }}
@@ -183,14 +185,14 @@ const AddFriend = ({
                 type="primary"
                 style={{ width: 80, height: 35, background: "#0000b3" }}
                 onClick={() => {
-                  if (!friendRequest[0]) {
+                  if (!me.friendRequest[0]) {
                     console.error("Friend request is empty");
                     return;
                   }
                   onAcceptFriend({
                     variables: {
                       name,
-                      friendName: friendRequest[0].name,
+                      friendName: me.friendRequest[0].name,
                     },
                     onError: (err) => {
                       console.error("Error: " + err.message);
@@ -205,14 +207,14 @@ const AddFriend = ({
                 type="primary"
                 style={{ width: 80, height: 35, background: "#0000b3" }}
                 onClick={() => {
-                  if (!friendRequest[0]) {
+                  if (!me.friendRequest[0]) {
                     console.error("Friend request is empty");
                     return;
                   }
                   onRejectFriend({
                     variables: {
                       name,
-                      friendName: friendRequest[0].name,
+                      friendName: me.friendRequest[0].name,
                     },
                     onError: (err) => {
                       console.error("Error: " + err.message);
@@ -251,7 +253,7 @@ const AddFriend = ({
                 style={{ overflow: "auto" }}
                 size="small"
                 bordered
-                dataSource={friends}
+                dataSource={me.friends}
                 renderItem={(item) => <List.Item>{item.name}</List.Item>}
               />
             </div>

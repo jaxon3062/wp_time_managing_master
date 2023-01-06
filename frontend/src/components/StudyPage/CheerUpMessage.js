@@ -94,20 +94,22 @@ const CheerUpMessage = () => {
               placeholder="Cheer up for your friends "
               showCount
               maxLength={30}
+              value={cheerUpMessage}
               onChange={(e) => setCheerUpMessage(e.target.value)}
               enterButton="Send"
-              onSearch={() =>
+              onSearch={() => {
                 onSendMessage({
                   variables: {
-                    from: name,
-                    to: name,
+                    name: name,
                     context: cheerUpMessage,
                   },
                   onError: (err) => {
                     console.error(err);
                   },
-                })
-              }
+                });
+                setCheerUpMessage("");
+              }}
+
             />
             <div
               style={{
@@ -131,12 +133,12 @@ const CheerUpMessage = () => {
                 // style={{ overflow: 'auto' }}
                 size="small"
                 bordered
-                dataSource={me.friends}
+                dataSource={me.friends.filter((fr) => fr.status !== "OFFLINE")}
                 renderItem={(item) => (
                   <List.Item>
                     <List.Item.Meta
                       title={item.name}
-                      description={item.content}
+                      description={`${item.status}: ${item.message}`}
                     />
                   </List.Item>
                 )}

@@ -10,11 +10,7 @@ const userSchema = new mongoose.Schema(
             ref: "user"
         }],
         status: { type: String, required: true },
-        messages: [{ 
-            from: {type: String, required: true },
-            to: {type: String, required: true},
-            context: {type: String, required: true},
-        }],
+        message: { type: String },
         friendRequest: [{ 
             type: Schema.Types.ObjectId, 
             required: true,

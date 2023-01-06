@@ -13,8 +13,10 @@ import {
   STATUS_UPDATE_MUTATION,
   FRIENDUPDATED,
   FRIENDSTATUSUPDATE,
+  MESSAGERECEIVED,
 } from "../../graphql";
 import { useQuery, useMutation, useLazyQuery } from "@apollo/client";
+import { genComponentStyleHook } from "antd/es/theme/internal";
 
 const ManageContext = React.createContext({
   name: "",
@@ -52,6 +54,7 @@ const ManageProvider = (props) => {
         name: name,
       },
       updateQuery: (prev, { subscriptionData }) => {
+        console.log("subPub", subscriptionData);
         if (!subscriptionData.data) return prev;
         const updateUser = subscriptionData.data.friendUpdate;
         return {
@@ -62,8 +65,11 @@ const ManageProvider = (props) => {
           },
         };
       },
+      onError: (err) => {
+        console.error(err);
+      },
     });
-  }, [subscribeToMore]);
+  }, [subscribeToMore, name]);
 
   useEffect(() => {
     subscribeToMore({
@@ -72,19 +78,54 @@ const ManageProvider = (props) => {
         name: name,
       },
       updateQuery: (prev, { subscriptionData }) => {
+        console.log("subPub", subscriptionData);
         if (!subscriptionData.data) return prev;
         const updateFriend = subscriptionData.data.friendStatusUpdate;
         return {
           findUser: {
             ...prev.findUser,
-            friends: prev.friends.map((fr) =>
-              fr.name === updateFriend.name ? updateFriend : fr
+            friends: prev.findUser.friends.map((fr) =>
+              fr.name === updateFriend.name ? { ...fr, ...updateFriend } : fr
             ),
           },
         };
       },
     });
-  }, [subscribeToMore]);
+  }, [subscribeToMore, name]);
+
+  useEffect(() => {
+    subscribeToMore({
+      document: MESSAGERECEIVED,
+      variables: {
+        name: name,
+      },
+      updateQuery: (prev, { subscriptionData }) => {
+        console.log("subPub", subscriptionData);
+        if (!subscriptionData.data) return prev;
+        const sender = subscriptionData.data.messageReceived;
+        return {
+          findUser: {
+            ...prev.findUser,
+            friends: prev.findUser.friends.map((fr) =>
+              (fr.name === sender.name 
+              ? { ...fr, message: sender.message } 
+              : fr)
+            ),
+          },
+        };
+      },
+      onError: (err) => {
+        console.error(err);
+      },
+    });
+  }, [subscribeToMore, name]);
+
+  useEffect(() => {
+    //console.log("current data", data);
+    if (data && data.findUser) {
+      setMe(data.findUser);
+    }
+  }, [data]);
 
   const onStart = () => {
     // when start study
@@ -106,7 +147,7 @@ const ManageProvider = (props) => {
       variables: {
         name: name,
         status: "ONLINE",
-        content: subjectToStudy,
+        content: "",
       },
       onError: (err) => {
         console.error(err);

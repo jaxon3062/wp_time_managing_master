@@ -14,8 +14,6 @@ export const FRIENDUPDATED = gql`
     subscription FriendUpdate($name: String!) {
         friendUpdate(name: $name) {
             name
-            status
-            content
             friends {
                 name
                 status
@@ -30,11 +28,9 @@ export const FRIENDUPDATED = gql`
 
 export const MESSAGERECEIVED = gql`
     subscription MessageReceive($name: String!) {
-        name
-        messages {
-            from
-            to
-            context
+        messageReceived(name: $name) {
+            name
+            message
         }
     }
 `;

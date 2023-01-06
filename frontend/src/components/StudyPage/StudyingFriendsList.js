@@ -23,6 +23,7 @@ const StudyingFriendsList = () => {
 
   return (
     <Wrapper>
+
         <div
         style={{
           width: 660,
@@ -31,6 +32,7 @@ const StudyingFriendsList = () => {
           overflowX: 'hidden'
         }}
         >
+          {/*<div>Friends studying</div>*/}
           <List
               grid={{
               gutter: 6,

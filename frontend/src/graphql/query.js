@@ -11,12 +11,9 @@ export const USER_QUERY = gql`
                 name
                 status
                 content
+                message
             }
-            messages {
-                from
-                to
-                context
-            }
+            message
             friendRequest {
                 name   
             }

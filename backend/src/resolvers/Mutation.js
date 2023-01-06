@@ -135,6 +135,8 @@ const Mutation = {
     }
 
     user.status = "ONLINE";
+    user.content = "";
+    user.message = "";
     await user.save();
 
     for (let fr of user.friends) {
@@ -154,7 +156,7 @@ const Mutation = {
       .findOne({ name: name })
       .populate({ path: "friends" });
     user.status = status;
-    user.content = status === "STUDY" ? content : "";
+    user.content = (status === "STUDY" ? content : "");
     await user.save();
 
     for (let fr of user.friends) {
@@ -165,17 +167,20 @@ const Mutation = {
 
     return user;
   },
-  sendMessage: async (parent, { from, to, context }, { userModel, pubSub }) => {
-    const receiver = await userModel.findOne({ name: to });
-    receiver.messages.push({ from, to, context });
-    receiver.messages = receiver.messages.slice(-5);
-    await receiver.save();
+  sendMessage: async (parent, { name, context }, { userModel, pubSub }) => {
+    const user = await userModel
+      .findOne({ name: name })
+      .populate({ path: "friends" });
+    user.message = context;
+    await user.save();
+    
+    for (let fr of user.friends) {
+      pubSub.publish(`${fr.name} received message`, {
+        messageReceived: user,
+      });
+    }
 
-    pubSub.publish(`${to} received message`, {
-      messageReceived: receiver,
-    });
-
-    return receiver;
+    return user;
   },
 };
 

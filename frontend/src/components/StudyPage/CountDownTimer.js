@@ -65,6 +65,7 @@ const CountDownTimer = () => {
       onOk() {
         //need onClick function
         setIfStartCounting(!ifStartCounting);
+        onFinish();
         console.log("OK");
       },
       onCancel() {
@@ -93,7 +94,10 @@ const CountDownTimer = () => {
       <Countdown
         title="Countdown"
         value={finalValueOfCountDown}
-        onFinish={onFinish}
+        onFinish={() => {
+          setIfStartCounting(!ifStartCounting);
+          onFinish();
+        }}
       ></Countdown>
       <Button
         shape="default"
@@ -103,7 +107,7 @@ const CountDownTimer = () => {
         style={{ marginLeft: 20 }}
         onClick={showQuitConfirm}
       >
-        quit
+        Quit
       </Button>
     </Wrapper>
   );

@@ -10,7 +10,6 @@ import Mutation from './resolvers/Mutation.js';
 import Subscription from './resolvers/Subsciption.js';
 import User from './resolvers/User.js';
 import StatusResolver from './resolvers/Status';
-import ErrorMessageResolver from './resolvers/ErrorMessage';
 
 // db
 import userModel from "./models/user.js";
@@ -30,7 +29,6 @@ const yoga = createYoga({
         Mutation,
         Subscription,
         Status: StatusResolver,
-        ErrorMessage: ErrorMessageResolver,
         
       },
     }),
