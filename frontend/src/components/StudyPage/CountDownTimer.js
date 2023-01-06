@@ -1,25 +1,8 @@
 import styled from "styled-components";
-import {
-  Modal,
-  Space,
-  Button,
-  Tag,
-  message,
-  Input,
-  Divider,
-  Statistic,
-} from "antd";
+import { Modal, Button, Statistic } from "antd";
 import TextField from "@material-ui/core/TextField";
 
-import Typography from "@material-ui/core/Typography";
-
-import { useState, useEffect, useRef, useContext } from "react";
-import { TimePicker } from "antd";
-import {
-  CloseOutlined,
-  UserOutlined,
-  ExclamationCircleFilled,
-} from "@ant-design/icons";
+import { CloseOutlined, ExclamationCircleFilled } from "@ant-design/icons";
 import dayjs from "dayjs";
 
 import { useManage } from "../../containers/hooks/useManage.js";

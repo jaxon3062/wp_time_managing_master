@@ -1,33 +1,32 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 // havent finish
 export const USER_QUERY = gql`
-    query GetUser($name: String!){
-        findUser(name: $name){
-            name
-            status
-            content
-            friends {
-                name
-                status
-                content
-                message
-            }
-            message
-            friendRequest {
-                name   
-            }
-        }
-
+  query GetUser($name: String!) {
+    findUser(name: $name) {
+      name
+      status
+      content
+      friends {
+        name
+        status
+        content
+        message
+      }
+      message
+      friendRequest {
+        name
+      }
     }
+  }
 `;
 
 export const GET_FRIENDS_QUERY = gql`
-    query GetFriends($name: String!) {
-        getFriends(name: $name) {
-            name
-            status
-            content
-        }
+  query GetFriends($name: String!) {
+    getFriends(name: $name) {
+      name
+      status
+      content
     }
+  }
 `;

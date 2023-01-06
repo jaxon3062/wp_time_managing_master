@@ -123,8 +123,8 @@ const Mutation = {
   },
   logIn: async (parent, { name, password }, { userModel, pubSub }) => {
     const user = await userModel
-        .findOne({ name: name })
-        .populate({ path: "friends" });
+      .findOne({ name: name })
+      .populate({ path: "friends" });
 
     // if user not exist
     if (!user) {
@@ -142,9 +142,9 @@ const Mutation = {
     await user.save();
 
     for (let fr of user.friends) {
-        pubSub.publish(`${fr.name} status update`, {
-            friendStatusUpdate: user,
-        });
+      pubSub.publish(`${fr.name} status update`, {
+        friendStatusUpdate: user,
+      });
     }
 
     return user;
@@ -158,7 +158,7 @@ const Mutation = {
       .findOne({ name: name })
       .populate({ path: "friends" });
     user.status = status;
-    user.content = (status === "STUDY" ? content : "");
+    user.content = status === "STUDY" ? content : "";
     await user.save();
 
     for (let fr of user.friends) {
@@ -175,7 +175,7 @@ const Mutation = {
       .populate({ path: "friends" });
     user.message = context;
     await user.save();
-    
+
     for (let fr of user.friends) {
       pubSub.publish(`${fr.name} received message`, {
         messageReceived: user,

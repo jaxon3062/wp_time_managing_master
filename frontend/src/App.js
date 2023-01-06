@@ -1,12 +1,9 @@
-import logo from './logo.svg';
-import { Button, Input, Tag, message} from 'antd'
 import styled from "styled-components";
-import MainPage from './containers/MainPage.js'
-import StudyPage from './containers/StudyPage.js'
-import SignIn from './containers/SignIn.js'
-import { useState, useEffect, useRef } from "react";
-import useManage from './containers/hooks/useManage'
-import './App.css';
+import MainPage from "./containers/MainPage.js";
+import StudyPage from "./containers/StudyPage.js";
+import SignIn from "./containers/SignIn.js";
+import useManage from "./containers/hooks/useManage";
+import "./App.css";
 
 const Wrapper = styled.div`
   display: flex;
@@ -19,19 +16,13 @@ const Wrapper = styled.div`
 `;
 
 function App() {
-  const { signedIn, setSignedIn, ifStartCounting} = useManage();
+  const { signedIn, ifStartCounting } = useManage();
 
   return (
-    <Wrapper> 
-      { signedIn 
-        ? <SignIn />
-        : ifStartCounting
-          ? <StudyPage /> 
-          : <MainPage /> 
-      } 
+    <Wrapper>
+      {signedIn ? <SignIn /> : ifStartCounting ? <StudyPage /> : <MainPage />}
     </Wrapper>
-    
-  )
+  );
 }
 
 export default App;

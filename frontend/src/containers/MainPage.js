@@ -1,20 +1,11 @@
-import { useState, useEffect, useRef } from "react";
-import { Button, Input, Tag, message, Tabs, Avatar, AutoComplete } from "antd";
+import { useState } from "react";
 import { Divider } from "antd";
 import { useManage } from "./hooks/useManage.js";
 import styled from "styled-components";
 import React from "react";
-import {
-  LaptopOutlined,
-  NotificationOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
 import Header from "../components/Header";
 import SelectTime from "../components/MainPage/SelectTime";
 import AddFriend from "../components/MainPage/AddFriend.js";
-
-import { useQuery } from '@apollo/client';
-import { USER_QUERY, FRIENDUPDATED } from '../graphql';
 
 const Wrapper = styled.div`
   width: 1460px;
@@ -26,12 +17,7 @@ const Wrapper = styled.div`
 `;
 
 const MainPage = () => {
-  const {
-    setMe,
-    called,
-    loading,
-    error,
-  } = useManage();
+  const { called, loading, error } = useManage();
 
   const [friendName, setFriendName] = useState("");
 
@@ -41,16 +27,16 @@ const MainPage = () => {
     return <p>Error :(</p>;
   }
 
-
-  
-
   return (
     <Wrapper>
       <Header />
       <Divider>choose how long you want to study</Divider>
       <SelectTime />
       <br></br>
-      <AddFriend friendName={friendName} setFriendName={setFriendName} ></AddFriend>
+      <AddFriend
+        friendName={friendName}
+        setFriendName={setFriendName}
+      ></AddFriend>
     </Wrapper>
   );
 };

@@ -1,15 +1,10 @@
-import { useState, useEffect, useRef } from "react";
-import { Space, Button, Input, Tag, message, Tabs, Avatar, AutoComplete} from 'antd'
-import { Divider } from 'antd';
-import {useManage} from './hooks/useManage.js'
+import { Space } from "antd";
+import { Divider } from "antd";
 import styled from "styled-components";
-import React from 'react';
-import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons';
-import Header from '../components/Header';
-import SelectTime from '../components/MainPage/SelectTime';
-import AddFriend from "../components/MainPage/AddFriend.js";
+import React from "react";
+import Header from "../components/Header";
 import CountDownTimer from "../components/StudyPage/CountDownTimer.js";
-import StudyingFriendsList from "../components/StudyPage/StudyingFriendsList.js"
+import StudyingFriendsList from "../components/StudyPage/StudyingFriendsList.js";
 import CheerUpMessage from "../components/StudyPage/CheerUpMessage.js";
 
 const Wrapper = styled.div`
@@ -22,24 +17,25 @@ const Wrapper = styled.div`
 `;
 
 const StudyPage = () => {
-  
   return (
     <Wrapper>
-        <Header />
-        <CountDownTimer /> 
-        <br></br>
-        <br></br>
-        <Divider>Friends online</Divider>
-        <br></br>
-        <Space  direction="horizontal" align="center" style={{width: '100%', justifyContent: 'center'}}>
-          <StudyingFriendsList />
-          <Divider type="vertical" />
-          <CheerUpMessage />
-
-        </Space>
-        
-   </Wrapper>
+      <Header />
+      <CountDownTimer />
+      <br></br>
+      <br></br>
+      <Divider>Friends online</Divider>
+      <br></br>
+      <Space
+        direction="horizontal"
+        align="center"
+        style={{ width: "100%", justifyContent: "center" }}
+      >
+        <StudyingFriendsList />
+        <Divider type="vertical" />
+        <CheerUpMessage />
+      </Space>
+    </Wrapper>
   );
-}
-  
+};
+
 export default StudyPage;

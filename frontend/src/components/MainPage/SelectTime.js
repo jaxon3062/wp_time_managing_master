@@ -1,10 +1,7 @@
 import styled from "styled-components";
-import { Space, Button, Tag, message, Input, Divider } from "antd";
-// import Typography from '@material-ui/core/Typography';
-import { useState, useEffect, useRef, useContext } from "react";
+import { Space, Button } from "antd";
 import { TimePicker } from "antd";
-import { CaretRightOutlined, UserOutlined } from "@ant-design/icons";
-import dayjs from "dayjs";
+import { CaretRightOutlined } from "@ant-design/icons";
 import TextField from "@mui/material/TextField";
 
 import { useManage } from "../../containers/hooks/useManage.js";
@@ -18,12 +15,10 @@ const Wrapper = styled.section`
 
 const SelectTime = () => {
   const {
-    studyTime,
     setStudyTime,
     ifStartCounting,
     setIfStartCounting,
     setSubjectToStudy,
-    subjectToStudy,
     onStart,
   } = useManage();
 

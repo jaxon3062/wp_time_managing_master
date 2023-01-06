@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef, useContext } from "react";
-import { Button, Input, Tag, message } from "antd";
+import { useState, useEffect, useContext } from "react";
 import React from "react";
 import {
   USER_QUERY,
@@ -15,8 +14,7 @@ import {
   FRIENDSTATUSUPDATE,
   MESSAGERECEIVED,
 } from "../../graphql";
-import { useQuery, useMutation, useLazyQuery } from "@apollo/client";
-import { genComponentStyleHook } from "antd/es/theme/internal";
+import { useMutation, useLazyQuery } from "@apollo/client";
 
 const ManageContext = React.createContext({
   name: "",
@@ -78,7 +76,7 @@ const ManageProvider = (props) => {
         name: name,
       },
       updateQuery: (prev, { subscriptionData }) => {
-        console.log("subPub", subscriptionData);
+        //console.log("subPub", subscriptionData);
         if (!subscriptionData.data) return prev;
         const updateFriend = subscriptionData.data.friendStatusUpdate;
         return {
@@ -107,9 +105,7 @@ const ManageProvider = (props) => {
           findUser: {
             ...prev.findUser,
             friends: prev.findUser.friends.map((fr) =>
-              (fr.name === sender.name 
-              ? { ...fr, message: sender.message } 
-              : fr)
+              fr.name === sender.name ? { ...fr, message: sender.message } : fr
             ),
           },
         };

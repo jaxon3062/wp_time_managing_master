@@ -1,19 +1,15 @@
 import styled from "styled-components";
-import { Space, Button, Tag, message, Input, Divider, List, Badge } from "antd";
-// import Typography from '@material-ui/core/Typography';
-import { useState, useEffect, useRef, useContext } from "react";
-import { TimePicker } from "antd";
+import { Space, Button, Input, Divider, List, Badge } from "antd";
+
 import TextField from "@material-ui/core/TextField";
-import { CaretRightOutlined, UserOutlined } from "@ant-design/icons";
+import { UserOutlined } from "@ant-design/icons";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "antd";
 
-import { useQuery, useMutation } from "@apollo/client";
 import { useManage } from "../../containers/hooks/useManage.js";
-import { genComponentStyleHook } from "antd/es/theme/internal.js";
 
 const { Title } = Typography;
 
@@ -156,7 +152,9 @@ const AddFriend = ({ friendName, setFriendName }) => {
                   label="friend confirm"
                   // defaultValue is for friendRequest[0]
                   value={
-                    me.friendRequest.length !== 0 ? me.friendRequest[0].name : ""
+                    me.friendRequest.length !== 0
+                      ? me.friendRequest[0].name
+                      : ""
                   }
                   InputProps={{
                     readOnly: true,
