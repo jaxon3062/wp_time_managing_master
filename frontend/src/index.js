@@ -22,7 +22,7 @@ const API_ROOT =
 
 const WS_URL =
   process.env.NODE_ENV === "production"
-    ? window.location.origin.replace(/^http/, "ws")
+    ? "wss://wptimemanagingmaster-production.up.railway.app/graphql"
     : "ws://localhost:4000/graphql";
 
 const httpLink = new HttpLink({
