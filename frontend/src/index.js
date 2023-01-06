@@ -17,12 +17,12 @@ import { createClient } from "graphql-ws";
 
 const API_ROOT =
   process.env.NODE_ENV === "production"
-    ? "/graphql"
+    ? "https://wptimemanagingmaster-production.up.railway.app/graphql"
     : "http://localhost:4000/graphql";
 
 const WS_URL =
   process.env.NODE_ENV === "production"
-    ? window.location.origin.replace(/^http/, "wss")
+    ? window.location.origin.replace(/^http/, "ws")
     : "ws://localhost:4000/graphql";
 
 const httpLink = new HttpLink({

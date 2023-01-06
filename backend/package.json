@@ -24,6 +24,6 @@
   },
   "scripts": {
     "server": "nodemon src/index.js --ext js,graphql --exec babel-node",
-    "deploy": "NODE_ENV=production babel-node server.js"
+    "deploy": "NODE_ENV=production babel-node src/index.js"
   }
 }
