@@ -115,6 +115,8 @@ const Mutation = {
       name: name,
       password: pass,
       status: "OFFLINE",
+      content: "",
+      message: "",
     });
     await newUser.save();
     return newUser;

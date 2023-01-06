@@ -2,6 +2,7 @@
   "name": "wp_time_managing_master",
   "version": "1.0.0",
   "scripts": {
+    "install:all": "cd backend && yarn && cd ../frontend && yarn",
     "start": "cd frontend && yarn start",
     "server": "cd backend && yarn server"
   },
