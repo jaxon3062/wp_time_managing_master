@@ -20,7 +20,7 @@ const AppTitle = ({name}) => (
     // Chat Room</h1></Wrapper>
     <Wrapper>
         <h1>
-        Time manage master
+        Time managing master
         </h1>
         <h1>
         <ClockCircleOutlined />
